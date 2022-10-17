@@ -1,12 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contenful Explorer</title>
+    <title>Contentful Explorer</title>
 </head>
+
 <body>
-    Hello Github Pages!
+    <div id="auth-form">
+        <input id="auth-client-id" value="" placeholder="client id">
+        <input id="auth-client-secret" value="" placeholder="client secret">
+
+        <button id="btn-token">Get Token</button>
+    </div>
+
+    <div id="token"></div>
+
+    <style>
+        #token {
+            display: none;
+        }
+    </style>
+
+    <script>
+        var clientIdEl = document.querySelector("#auth-client-id");
+        var clientSecretEl = document.querySelector("#auth-client-secret");
+
+        var btnTokenEl = document.querySelector("#btn-token");
+
+        btnTokenEl.addEventListener("click", function (e) {
+            var clientId = clientIdEl.value;
+            var clientSecret = clientSecretEl.value;
+
+            var url = `https://be.contentful.com/oauth/authorize?response_type=token&client_id=${clientId}&client_secret=client_secret=${clientSecret}&scope=content_management_manage`;
+
+            window.location.replace(url);
+        });
+
+        var hash = window.location.hash.substring(14); // #access_token=
+
+        if (hash) {
+            var tokenEl = document.querySelector("#token");
+            tokenEl.style["display"] = "block";
+            tokenEl.textContent = `Token: ${hash}`;
+            
+            var authFormEl = document.querySelector("#auth-form");
+            authFormEl.style["display"] = "none";   
+        }
+    </script>
 </body>
+
 </html>
