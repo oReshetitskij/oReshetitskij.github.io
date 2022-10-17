@@ -34,7 +34,7 @@
             var clientId = clientIdEl.value;
             var clientSecret = clientSecretEl.value;
 
-            var url = `https://be.contentful.com/oauth/authorize?response_type=token&client_id=${clientId}&client_secret=client_secret=${clientSecret}&scope=content_management_manage`;
+            var url = `https://be.contentful.com/oauth/authorize?response_type=token&client_id=${clientId}&client_secret=${clientSecret}&scope=content_management_read`;
 
             window.location.replace(url);
         });
